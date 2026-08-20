@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planilla de Empleados | TrendyCaps</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --accent-color: #ff4757;
+            --accent-green: #2ed573;
+            --text-color: #ffffff;
+            --text-muted: #a4b0be;
+            --border-color: #2f3542;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Encabezado */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .btn-volver {
+            color: var(--text-muted);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        .btn-volver:hover {
+            color: var(--accent-color);
+        }
+
+        /*Tarjetas de Resumen (Métricas) */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .metric-card {
+            background-color: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .metric-card h3 {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .metric-card .number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-green);
+        }
+
+        /* Layout Principal: Formulario + Tabla */
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .admin-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Formulario */
+        .form-card {
+            background-color: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            height: fit-content;
+        }
+
+        .form-card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.6rem;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-color);
+            outline: none;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--accent-color);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 0.5rem;
+        }
+
+        .btn-submit:hover {
+            background-color: #ff6b81;
+        }
+
+        /* Tabla de Empleados */
+        .table-card {
+            background-color: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: rgba(255, 255, 255, 0.03);
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        .btn-delete {
+            background: none;
+            border: none;
+            color: #ff4757;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .btn-delete:hover {
+            transform: scale(1.2);
+        }
+
+        .badge {
+            background-color: rgba(255, 71, 87, 0.2);
+            color: var(--accent-color);
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Encabezado -->
+    <header>
+        <div>
+            <h1>Control de Planilla 2026</h1>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Gestión de sueldos y colaboradores de TrendyCaps</p>
+        </div>
+        <a href="index.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a la tienda</a>
+    </header>
+
+    <!-- Métricas del Sistema -->
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <h3>Total Empleados</h3>
+            <div class="number" id="total-empleados">0</div>
+        </div>
+        <div class="metric-card">
+            <h3>Monto Total Planilla</h3>
+            <div class="number" id="monto-total">$0.00</div>
+        </div>
+        <div class="metric-card">
+            <h3>Promedio Salarial</h3>
+            <div class="number" id="promedio-salario">$0.00</div>
+        </div>
+    </div>
+
+    <!-- Panel Principal -->
+    <div class="admin-layout">
+        
+        <!-- Formulario para Registrar -->
+        <div class="form-card">
+            <h2><i class="fa-solid fa-user-plus"></i> Registrar Empleado</h2>
+            <form id="form-empleado">
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo</label>
+                    <input type="text" id="nombre" placeholder="Ej. Carlos Mendoza" required>
+                </div>
+                <div class="form-group">
+                    <label for="puesto">Puesto / Cargo</label>
+                    <select id="puesto" required>
+                        <option value="Vendedor">Vendedor</option>
+                        <option value="Diseñador">Diseñador de Gorras</option>
+                        <option value="Administrador">Administrador</option>
+                        <option value="Logística">Encargado de Envíos</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="salario">Salario Base ($)</label>
+                    <input type="number" id="salario" placeholder="1200" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="descuentos">Deducciones/Deducción ($)</label>
+                    <input type="number" id="descuentos" placeholder="100" min="0" step="0.01" value="0">
+                </div>
+                <button type="submit" class="btn-submit">Agregar a Planilla</button>
+            </form>
+        </div>
+
+        <!-- Tabla de Datos -->
+        <div class="table-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Empleado</th>
+                        <th>Puesto</th>
+                        <th>Salario Base</th>
+                        <th>Deducciones</th>
+                        <th>Salario Neto</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-cuerpo">
+                    <!-- Los empleados agregados aparecerán aquí dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Lista inicial de empleados de muestra
+    let empleados = [
+        { id: 1, nombre: "Sofía Martínez", puesto: "Diseñador", salario: 1500, deducciones: 120 },
+        { id: 2, nombre: "Lucas Gómez", puesto: "Vendedor", salario: 800, deducciones: 50 }
+    ];
+
+    const form = document.getElementById('form-empleado');
+    const tablaCuerpo = document.getElementById('tabla-cuerpo');
+
+    // Función para renderizar la tabla y actualizar totales
+    function actualizarPlanilla() {
+        tablaCuerpo.innerHTML = '';
+        let totalMonto = 0;
+
+        empleados.forEach((emp, index) => {
+            const salarioNeto = emp.salario - emp.deducciones;
+            totalMonto += salarioNeto;
+
+            const fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td><strong>${emp.nombre}</strong></td>
+                <td><span class="badge">${emp.puesto}</span></td>
+                <td>$${emp.salario.toFixed(2)}</td>
+                <td>$${emp.deducciones.toFixed(2)}</td>
+                <td style="color: var(--accent-green); font-weight: bold;">$${salarioNeto.toFixed(2)}</td>
+                <td>
+                    <button class="btn-delete" onclick="eliminarEmpleado(${index})" title="Eliminar">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </td>
+            `;
+            tablaCuerpo.appendChild(fila);
+        });
+
+        // Actualizar Tarjetas de Métricas
+        const totalEmp = empleados.length;
+        document.getElementById('total-empleados').textContent = totalEmp;
+        document.getElementById('monto-total').textContent = `$${totalMonto.toFixed(2)}`;
+        
+        const promedio = totalEmp > 0 ? totalMonto / totalEmp : 0;
+        document.getElementById('promedio-salario').textContent = `$${promedio.toFixed(2)}`;
+    }
+
+    // Agregar nuevo empleado desde el formulario
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const nuevoEmp = {
+            id: Date.now(),
+            nombre: document.getElementById('nombre').value,
+            puesto: document.getElementById('puesto').value,
+            salario: parseFloat(document.getElementById('salario').value),
+            deducciones: parseFloat(document.getElementById('descuentos').value) || 0
+        };
+
+        empleados.push(nuevoEmp);
+        actualizarPlanilla();
+        form.reset();
+    });
+
+    // Eliminar empleado de la lista
+    function eliminarEmpleado(index) {
+        empleados.splice(index, 1);
+        actualizarPlanilla();
+    }
+
+    // Cargar datos al iniciar
+    actualizarPlanilla();
+</script>
+
+</body>
+</html>
