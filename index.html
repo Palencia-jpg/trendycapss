@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrendyCaps | Estilo y Tendencia 2026</title>
-    <!-- FontAwesome para iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Planilla de Empleados | TrendyCaps</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* VARIABLES DE COLOR */
         :root {
-            --bg-color: #0b0c10;
-            --surface-color: #1f2833;
-            --accent-color: #baa763;;
-            --accent-hover: #baa763;
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --accent-color: #ff4757;
+            --accent-green: #2ed573;
             --text-color: #ffffff;
-            --text-muted: #c5a880;
-            --text-light: #c5c6c7;
+            --text-muted: #a4b0be;
+            --border-color: #2f3542;
         }
 
         * {
@@ -23,547 +21,344 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            scroll-behavior: smooth;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.6;
+            padding: 2rem;
         }
 
-        /* NAVEGACIÓN Y MENÚS */
-        header {
-            background-color: rgba(11, 12, 16, 0.95);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid #1f2833;
-            backdrop-filter: blur(5px);
-        }
-
-        .nav-container {
+        .container {
             max-width: 1200px;
             margin: 0 auto;
+        }
+
+        /* Encabezado */
+        header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: var(--text-color);
-        }
-
-        .logo span {
-            color: var(--accent-color);
-        }
-
-        .logo-img {
-            height: 35px;
-            width: auto;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        .nav-menu a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 1.0s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .nav-menu a:hover {
-            color: var(--accent-color);
-        }
-
-        /* MENÚ DESPLEGABLE */
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-toggle {
-            cursor: pointer;
-        }
-
-        .arrow {
-            font-size: 0.65rem;
-            transition: transform 2.0s;
-        }
-
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0%;
-            transform: translateX(-50%);
-            background-color: #1f2833;
-            border: 1px solid #45f3ff;
-            border-radius: 6px;
-            min-width: 200px;
-            list-style: none;
-            padding: 0.5rem 0;
-            padding-top: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-        }
-
-        .dropdown-menu li a {
-            padding: 0.7rem 1.5rem;
-            font-size: 0.95rem;
-            color: var(--text-light);
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 1.0s;
-        }
-
-        .dropdown-menu li a:hover {
-            color: var(--text-color);
-            background-color: rgba(255, 71, 87, 0.15);
-            padding-left: 1.8rem;
-        }
-
-        .dropdown:hover .dropdown-menu {
-            display: block;
-        }
-
-        .dropdown:hover .arrow {
-            transform: rotate(180deg);
-            color: var(--accent-color);
-        }
-
-        /* HERO / PORTADA */
-        .hero {
-            height: 85vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 0 2rem;
-            margin-top: 60px;
-            background: linear-gradient(rgba(11, 12, 16, 0.8), rgba(11, 12, 16, 0.85)), 
-                        url('https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
-        }
-
-        /* --- ANIMACIÓN DE LA GORRA (NUEVO) --- */
-        .gorra-animada {
-            font-size: 3.5rem;
-            display: inline-block;
-            margin-bottom: 1rem;
-            animation: girarYCambiarColor 4s linear infinite;
-            filter: drop-shadow(0 0 12px rgba(255, 71, 87, 0.6));
-        }
-
-        @keyframes girarYCambiarColor {
-            0% {
-                transform: rotate(0deg);
-                color: #ff4757; /* Rojo Neón */
-                filter: drop-shadow(0 0 10px #ff4757);
-            }
-            33% {
-                color: #45f3ff; /* Cian */
-                filter: drop-shadow(0 0 10px #45f3ff);
-            }
-            66% {
-                color: #c5a880; /* Dorado */
-                filter: drop-shadow(0 0 10px #c5a880);
-            }
-            100% {
-                transform: rotate(360deg);
-                color: #ff4757; /* Regresa a Rojo Neón */
-                filter: drop-shadow(0 0 10px #ff4757);
-            }
-        }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-weight: 900;
-        }
-
-        .hero-content p {
-            font-size: 1.25rem;
-            color: var(--text-light);
             margin-bottom: 2rem;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .hero-content span.founded {
-            display: block;
-            font-size: 1rem;
+        .btn-volver {
             color: var(--text-muted);
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            font-weight: bold;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 0.9rem 2.8rem;
             text-decoration: none;
-            font-weight: 700;
-            border-radius: 4px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: transform 0.3s, background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
         }
 
-        .btn:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-3px);
-        }
-
-        /* PRODUCTOS */
-        .products {
-            max-width: 1200px;
-            margin: 6rem auto;
-            padding: 0 2rem;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 70px;
-            height: 4px;
-            background-color: var(--accent-color);
-            margin: 12px auto 0;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-        }
-
-        .card {
-            background-color: var(--surface-color);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-        }
-
-        .card-img {
-            width: 100%;
-            height: 320px;
-            object-fit: cover;
-        }
-
-        .card-info {
-            padding: 2rem 1.5rem;
-        }
-
-        .card-title {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.5px;
-        }
-
-        .card-price {
+        .btn-volver:hover {
             color: var(--accent-color);
-            font-weight: 800;
-            font-size: 1.4rem;
-            margin-bottom: 1.2rem;
         }
 
-        /* SELECTOR DE TALLAS */
-        .selector-contenedor {
-            margin-bottom: 1.5rem;
+        /*Tarjetas de Resumen (Métricas) */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
         }
 
-        .selector-contenedor label {
-            display: block;
-            font-size: 0.8rem;
-            color: var(--text-light);
+        .metric-card {
+            background-color: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .metric-card h3 {
+            font-size: 0.9rem;
+            color: var(--text-muted);
             margin-bottom: 0.5rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        .producto-dropdown {
+        .metric-card .number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-green);
+        }
+
+        /* Layout Principal: Formulario + Tabla */
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .admin-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Formulario */
+        .form-card {
+            background-color: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            height: fit-content;
+        }
+
+        .form-card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .form-group input, .form-group select {
             width: 100%;
-            padding: 0.75rem;
+            padding: 0.6rem;
             background-color: var(--bg-color);
-            border: 1px solid #45f3ff;
-            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
             color: var(--text-color);
-            font-size: 0.9rem;
-            cursor: pointer;
             outline: none;
-            transition: border-color 0.3s;
-            appearance: none;
-            -webkit-appearance: none;
-            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='white'><polygon points='0,0 10,0 5,5'/></svg>");
-            background-repeat: no-repeat;
-            background-position: right 15px center;
         }
 
-        .producto-dropdown:focus {
+        .form-group input:focus, .form-group select:focus {
             border-color: var(--accent-color);
         }
 
-        .card-btn {
+        .btn-submit {
             width: 100%;
-            background-color: transparent;
-            border: 2px solid var(--accent-color);
-            color: var(--accent-color);
-            padding: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: all 0.3s;
-        }
-
-        .card-btn:hover {
             background-color: var(--accent-color);
             color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 0.5rem;
         }
 
-        /* SOBRE NOSOTROS */
-        .about {
+        .btn-submit:hover {
+            background-color: #ff6b81;
+        }
+
+        /* Tabla de Empleados */
+        .table-card {
             background-color: var(--surface-color);
-            padding: 6rem 2rem;
-            text-align: center;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            overflow-x: auto;
         }
 
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
         }
 
-        .about p {
-            color: var(--text-light);
-            font-size: 1.15rem;
-            margin-bottom: 1.8rem;
+        th, td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
         }
 
-        .about-highlight {
+        th {
+            background-color: rgba(255, 255, 255, 0.03);
             color: var(--text-muted);
-            font-weight: 700;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
         }
 
-        /* PIE DE PÁGINA */
-        footer {
-            background-color: #0b0c10;
-            padding: 4rem 2rem;
-            text-align: center;
-            border-top: 1px solid #1f2833;
-            color: var(--text-light);
+        .btn-delete {
+            background: none;
+            border: none;
+            color: #ff4757;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.2s;
         }
 
-        .footer-socials {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-socials a {
-            color: var(--text-light);
-            font-size: 1.8rem;
-            transition: color 0.3s, transform 0.3s;
-        }
-
-        .footer-socials a:hover {
-            color: var(--accent-color);
+        .btn-delete:hover {
             transform: scale(1.2);
         }
 
-        footer p {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.4);
-            margin-bottom: 0.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .nav-menu {
-                gap: 1rem;
-            }
-            .hero-content h1 {
-                font-size: 2.8rem;
-            }
+        .badge {
+            background-color: rgba(255, 71, 87, 0.2);
+            color: var(--accent-color);
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- Navegación Superior -->
+<div class="container">
+    <!-- Encabezado -->
     <header>
-        <div class="nav-container">
-            <a href="#inicio" class="logo">
-                <img src="D:\TrendyCaps\TrendyCaps.jpeg" font-size: 1.8rem width="auto-fit" height="35px">
-                Trendy<span>Caps</span>
-            </a>
-            
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="#inicio"><i class="fa-solid fa-house"></i> Inicio</a></li>
-                    
-                    <li class="dropdown">
-                        <a href="#productos" class="dropdown-toggle">Colección <span class="arrow">▼</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#productos"><i class="fa-solid fa-fire"></i> Lo más vendido</a></li>
-                            <li><a href="#productos"><i class="fa-solid fa-crown"></i> Edición 2026</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown">
-                        <a class="dropdown-toggle"><i class="fa-solid fa-share-nodes"></i> Redes <span class="arrow">▼</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram" style="color: #e1306c;"></i> Instagram</a></li>
-                            <li><a href="https://tiktok.com" target="_blank"><i class="fa-brands fa-tiktok" style="color: #ffffff;"></i> TikTok</a></li>
-                            <li><a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook" style="color: #1877f2;"></i> Facebook</a></li>
-                            <li><a href="https://twitter.com" target="_blank"><i class="fa-brands fa-x-twitter" style="color: #ffffff;"></i> Twitter / X</a></li>
-                        </ul>
-                    </li>
-
-                    <li><a href="#nosotros"><i class="fa-solid fa-circle-info"></i> Nosotros</a></li>
-                </ul>
-            </nav>
+        <div>
+            <h1>Control de Planilla 2026</h1>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Gestión de sueldos y colaboradores de TrendyCaps</p>
         </div>
+        <a href="index.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver a la tienda</a>
     </header>
 
-    <!-- Banner Principal con Gorra Animada -->
-    <section id="inicio" class="hero">
-        <div class="hero-content">
-            <!-- Icono de Gorra Animada (Rotación 360° + Cambio de Color) -->
-            <div>
-                <i class="fa-solid fa-graduation-cap gorra-animada"></i>
-            </div>
-            <span class="founded">Fundada en el 2026</span>
-            <h1>Lidera la Tendencia</h1>
-            <p>Diseñamos gorras premium con materiales futuristas para los que marcan las reglas del juego urbano.</p>
-            <a href="#productos" class="btn">Explorar Colección</a>
+    <!-- Métricas del Sistema -->
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <h3>Total Empleados</h3>
+            <div class="number" id="total-empleados">0</div>
         </div>
-    </section>
+        <div class="metric-card">
+            <h3>Monto Total Planilla</h3>
+            <div class="number" id="monto-total">$0.00</div>
+        </div>
+        <div class="metric-card">
+            <h3>Promedio Salarial</h3>
+            <div class="number" id="promedio-salario">$0.00</div>
+        </div>
+    </div>
 
-    <!-- Catálogo de Productos -->
-    <section id="productos" class="products">
-        <h2 class="section-title">Drop Exclusivo</h2>
-        <div class="grid">
-            
-            <!-- Producto 1 -->
-            <div class="card">
-                <img src="D:\TrendyCaps\NwEraBlack.jpeg" alt="Gorra Neon" class="card-img" loading="lazy">
-                <div class="card-info">
-                    <h3 class="card-title">New York Yankees Authentic Collection 59FIFTY Fitted Cap</h3>
-                    <p class="card-price">HNL 885</p>
-                    
-                    <div class="selector-contenedor">
-                        <label for="talla-p1">Elige tu talla:</label>
-                        <select id="talla-p1" class="producto-dropdown">
-                            <option value="s">Small (S) - Ajustable</option>
-                            <option value="m" selected>Medium (M) - Estándar</option>
-                            <option value="l">Large (L) - Confort Fit</option>
-                        </select>
-                    </div>
-
-                    <button class="card-btn">Añadir al Carrito</button>
+    <!-- Panel Principal -->
+    <div class="admin-layout">
+        
+        <!-- Formulario para Registrar -->
+        <div class="form-card">
+            <h2><i class="fa-solid fa-user-plus"></i> Registrar Empleado</h2>
+            <form id="form-empleado">
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo</label>
+                    <input type="text" id="nombre" placeholder="Ej. Carlos Mendoza" required>
                 </div>
-            </div>
-
-            <!-- Producto 2 -->
-            <div class="card">
-                <img src="D:\TrendyCaps\NwEraWhitejpeg.jpeg" alt="Gorra Dark" class="card-img" loading="lazy">
-                <div class="card-info">
-                    <h3 class="card-title">New York Yankees Authentic Collection 59FIFTY Fitted Cap</h3>
-                    <p class="card-price">HNL 885</p>
-                    
-                    <div class="selector-contenedor">
-                        <label for="talla-p2">Elige tu talla:</label>
-                        <select id="talla-p2" class="producto-dropdown">
-                            <option value="s">Small (S) - Ajustable</option>
-                            <option value="m" selected>Medium (M) - Estándar</option>
-                            <option value="l">Large (L) - Confort Fit</option>
-                        </select>
-                    </div>
-
-                    <button class="card-btn">Añadir al Carrito</button>
+                <div class="form-group">
+                    <label for="puesto">Puesto / Cargo</label>
+                    <select id="puesto" required>
+                        <option value="Vendedor">Vendedor</option>
+                        <option value="Diseñador">Diseñador de Gorras</option>
+                        <option value="Administrador">Administrador</option>
+                        <option value="Logística">Encargado de Envíos</option>
+                    </select>
                 </div>
-            </div>
-
-            <!-- Producto 3 -->
-            <div class="card">
-                <img src="D:\TrendyCaps\JC HATS.jpeg" alt="Gorra Retro" class="card-img" loading="lazy">
-                <div class="card-info">
-                    <h3 class="card-title">JC HATS POKER</h3>
-                    <p class="card-price">HNL 900</p>
-                    
-                    <div class="selector-contenedor">
-                        <label for="talla-p3">Elige tu talla:</label>
-                        <select id="talla-p3" class="producto-dropdown">
-                            <option value="s">Small (S) - Ajustable</option>
-                            <option value="m" selected>Medium (M) - Estándar</option>
-                            <option value="l">Large (L) - Confort Fit</option>
-                        </select>
-                    </div>
-
-                    <button class="card-btn">Añadir al Carrito</button>
+                <div class="form-group">
+                    <label for="salario">Salario Base ($)</label>
+                    <input type="number" id="salario" placeholder="1200" min="0" step="0.01" required>
                 </div>
-            </div>
-
+                <div class="form-group">
+                    <label for="descuentos">Deducciones/Deducción ($)</label>
+                    <input type="number" id="descuentos" placeholder="100" min="0" step="0.01" value="0">
+                </div>
+                <button type="submit" class="btn-submit">Agregar a Planilla</button>
+            </form>
         </div>
-    </section>
 
-    <!-- Sobre Nosotros -->
-    <section id="nosotros" class="about">
-        <div class="about-content">
-            <h2 class="section-title">Nuestra Historia</h2>
-            <p>Establecida en el año <span class="about-highlight">2026</span>, <strong style="color:#ffffff;">TrendyCaps</strong> nació en el núcleo del movimiento urbano como una respuesta a la necesidad de accesorios atemporales y de alta calidad.</p>
-            <p>Nuestras colecciones son de producción limitada para asegurar la exclusividad y reducir el impacto ecológico. No seguimos modas rápidas; pavimentamos el camino de las nuevas corrientes.</p>
+        <!-- Tabla de Datos -->
+        <div class="table-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Empleado</th>
+                        <th>Puesto</th>
+                        <th>Salario Base</th>
+                        <th>Deducciones</th>
+                        <th>Salario Neto</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-cuerpo">
+                    <!-- Los empleados agregados aparecerán aquí dinámicamente -->
+                </tbody>
+            </table>
         </div>
-    </section>
 
-    <!-- Pie de Página -->
-    <footer>
-        <div class="footer-socials">
-            <a href="https://instagram.com" target="_blank" title="Síguenos en Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://tiktok.com" target="_blank" title="Síguenos en TikTok"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="https://facebook.com" target="_blank" title="Síguenos en Facebook"><i class="fa-brands fa-facebook"></i></a>
-            <a href="https://twitter.com" target="_blank" title="Síguenos en X"><i class="fa-brands fa-x-twitter"></i></a>
-        </div>
-        <p>&copy; 2026 TrendyCaps. Todos los derechos reservados.</p>
-        <p>Estilo Urbano Auténtico & Vanguardista.</p>
-    </footer>
+    </div>
+</div>
+
+<script>
+    // Lista inicial de empleados de muestra
+    let empleados = [
+        { id: 1, nombre: "Sofía Martínez", puesto: "Diseñador", salario: 1500, deducciones: 120 },
+        { id: 2, nombre: "Lucas Gómez", puesto: "Vendedor", salario: 800, deducciones: 50 }
+    ];
+
+    const form = document.getElementById('form-empleado');
+    const tablaCuerpo = document.getElementById('tabla-cuerpo');
+
+    // Función para renderizar la tabla y actualizar totales
+    function actualizarPlanilla() {
+        tablaCuerpo.innerHTML = '';
+        let totalMonto = 0;
+
+        empleados.forEach((emp, index) => {
+            const salarioNeto = emp.salario - emp.deducciones;
+            totalMonto += salarioNeto;
+
+            const fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td><strong>${emp.nombre}</strong></td>
+                <td><span class="badge">${emp.puesto}</span></td>
+                <td>$${emp.salario.toFixed(2)}</td>
+                <td>$${emp.deducciones.toFixed(2)}</td>
+                <td style="color: var(--accent-green); font-weight: bold;">$${salarioNeto.toFixed(2)}</td>
+                <td>
+                    <button class="btn-delete" onclick="eliminarEmpleado(${index})" title="Eliminar">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </td>
+            `;
+            tablaCuerpo.appendChild(fila);
+        });
+
+        // Actualizar Tarjetas de Métricas
+        const totalEmp = empleados.length;
+        document.getElementById('total-empleados').textContent = totalEmp;
+        document.getElementById('monto-total').textContent = `$${totalMonto.toFixed(2)}`;
+        
+        const promedio = totalEmp > 0 ? totalMonto / totalEmp : 0;
+        document.getElementById('promedio-salario').textContent = `$${promedio.toFixed(2)}`;
+    }
+
+    // Agregar nuevo empleado desde el formulario
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const nuevoEmp = {
+            id: Date.now(),
+            nombre: document.getElementById('nombre').value,
+            puesto: document.getElementById('puesto').value,
+            salario: parseFloat(document.getElementById('salario').value),
+            deducciones: parseFloat(document.getElementById('descuentos').value) || 0
+        };
+
+        empleados.push(nuevoEmp);
+        actualizarPlanilla();
+        form.reset();
+    });
+
+    // Eliminar empleado de la lista
+    function eliminarEmpleado(index) {
+        empleados.splice(index, 1);
+        actualizarPlanilla();
+    }
+
+    // Cargar datos al iniciar
+    actualizarPlanilla();
+</script>
 
 </body>
 </html>
